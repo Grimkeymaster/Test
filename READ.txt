@@ -1,0 +1,31 @@
+Users Table:
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(100),
+    password VARCHAR(100),
+    email VARCHAR(100),
+    phone VARCHAR(15),
+    address VARCHAR(255),
+    gender VARCHAR(10),
+    photo_url VARCHAR(255)
+);
+
+Transactions Table:
+CREATE TABLE transactions (
+    id SERIAL PRIMARY KEY,
+    txn_id VARCHAR(50),
+    vegetable_name VARCHAR(100),
+    date DATE,
+    weight NUMERIC,
+    earning NUMERIC,
+    user_id INT REFERENCES users(id)
+);
+
+
+Cart Table:
+CREATE TABLE cart (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    item_id INT, -- Assuming you have an items table
+    quantity INT
+);

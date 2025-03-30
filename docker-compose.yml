@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: grimkeymaster
+      POSTGRES_PASSWORD: Shailesh@2003 
+      POSTGRES_DB: miniproject
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_USER: grimkeymaster
+      DB_PASSWORD: Shailesh@2003
+      DB_NAME: miniproject
+      DB_HOST: db # This should match the service name of the PostgreSQL container
+    depends_on:
+      - db
+
+volumes:
+  db_data:
